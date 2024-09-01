@@ -12,13 +12,17 @@ ctk.set_appearance_mode("dark")
 StartFrame = ctk.CTkFrame(window, width=520, height=540, fg_color="transparent")
 StartFrame.pack()
         
-
 MainFrame = ctk.CTkFrame(window, width=520, height=540, fg_color="transparent")
 
+OptionsFrame = ctk.CTkFrame(window, fg_color="transparent")
 
 def StartGame():
         StartFrame.pack_forget()
         MainFrame.pack()
+
+def OpenOptionsMenu():
+        StartFrame.pack_forget()
+        OptionsFrame.pack()
 
 def BackToMainMenu():
         MainFrame.pack_forget()
@@ -36,7 +40,9 @@ def AddCookieClickCount():
 def PrintCookieCount():
         print(CookieCount)
 
-#Save/Load System
+
+                        #Save/Load System
+
 def Save():
         f = open("Saves\save1", W)
         f.write(str(CookieCount))
@@ -58,16 +64,15 @@ introduction.pack()
 CookieCountDisplay = ctk.CTkLabel(MainFrame,text=CookieCount)
 CookieCountDisplay.pack()
 
-#Cookie button
+                #MainFrame buttons
+
+#CookieButton
 CookieButtonIcon = ImageTk.PhotoImage(file="Assets\Cookie.png")
 CookieButton = ctk.CTkButton(MainFrame,image=CookieButtonIcon,text="")
 CookieButton.configure(command=lambda:[AddCookieClickCount(), PrintCookieCount()])
 CookieButton.configure(hover_color="#1e1e1e") #1e1e1e
 CookieButton.configure(fg_color="#242424") #242424
 CookieButton.pack()
-#Start image
-StartMenuImage = ctk.CTkLabel(StartFrame,image=CookieButtonIcon,text="")
-StartMenuImage.pack()
 #Save button
 SaveButton = ctk.CTkButton(MainFrame,text="Save",corner_radius=15)
 SaveButton.configure(command=Save)
@@ -80,6 +85,12 @@ LoadButton.pack()
 ReturnToMenuButton = ctk.CTkButton(MainFrame,text="Return to main menu",corner_radius=15)
 ReturnToMenuButton.configure(command=BackToMainMenu)
 ReturnToMenuButton.pack()
+
+                #StartFrame buttons
+
+#Start image
+StartMenuImage = ctk.CTkLabel(StartFrame,image=CookieButtonIcon,text="")
+StartMenuImage.pack()
 #Start button
 StartButton = ctk.CTkButton(StartFrame,text="Start",corner_radius=15)
 StartButton.configure(command=StartGame)
@@ -88,6 +99,12 @@ StartButton.pack()
 LoadButton_StartFrame = ctk.CTkButton(StartFrame,text="Load Save",corner_radius=15)
 LoadButton_StartFrame.configure(command=lambda:[StartGame(), Load()])
 LoadButton_StartFrame.pack()
+OptionsButton_StartFrame = ctk.CTkButton(StartFrame, text="Options", corner_radius=15)
+OptionsButton_StartFrame.configure(command=OpenOptionsMenu)
+OptionsButton_StartFrame.pack()
+
+                #OptionsFrame buttons
+
 
 
 #window_iconimage = ImageTk.PhotoImage(file="Assets\Cookie.png")
